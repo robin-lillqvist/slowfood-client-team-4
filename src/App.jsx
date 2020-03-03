@@ -7,29 +7,30 @@ var foodlist = {
                 }
 
 const App = () => {
-  let showFoodlist
+  // let showFoodlist
 
-  if (foodlist) {
-    showFoodlist = (
-      <>
-        {foodlist.map(dish => {
-          return (
-            <div class='dish'>
-              <div>{dish[0]}</div>
-            </div>
-          )
-        })}
-      </>
-    )
-  }
-
-  foodlist.forEach(currentItem => {})
+  // if (foodlist) {
+  //   showFoodlist = (
+  //     <>
+  //       {foodlist.map(dish => {
+  //         return (
+  //           <div class='dish'>
+  //             <div>{dish[0]}</div>
+  //           </div>
+  //         )
+  //       })}
+  //     </>
+  //   )
+  // }
 
   return (
     <>
       <h1>Slowfood</h1>
-
-      {showFoodlist}
+      <div className="foodlist">
+        <div className="food">Potatis</div>
+        <div className="description">Potatis plockad på dom hallänska vidderna</div>
+        <div className="price">98</div>
+      </div>
     </>
   )
 }
