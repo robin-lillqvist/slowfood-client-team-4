@@ -20,40 +20,37 @@ import axios from 'axios'
 class App extends Component {
   state = { foodItems: [] }
 
+  componentDidMount () {
+    axios.get('../src/data/menu.json').then(response => {
+      this.setState({
+        foodItems: response.data
+      })
+    })
+  }
+
   render () {
-    const foodItems = this.state.foodItems;
-    let menuList;
+    const foodItems = this.state.foodItems
+    let menuList
 
     if (foodItems.length > 0) {
       menuList = foodItems.map(foodItem => {
+        debugger
         return (
           <>
             <div class='meal_name'>{foodItem.name}</div>
             <div class='meal_desc'>{foodItem.desc}</div>
             <div class='meal_price'>{foodItem.price}</div>
-            </>
-        );
-      });
+          </>
+        )
+      })
     }
-
-    debugger
 
     return (
       <>
         <h1>Slowfood</h1>
         <div className='foodlist'>{menuList}</div>
-        
       </>
     )
-  }
-
-  componentDidMount () {
-    axios.get('./data/menu.json')
-    .then(response => {
-      this.setState({
-        foodItems: response.data
-      })
-    })
   }
 }
 
