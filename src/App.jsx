@@ -1,38 +1,60 @@
-import React from 'react'
+import React, { Component } from 'react'
+import './App.css'
+import axios from 'axios'
 
-var foodlist = {
-                  dish1: ['potatis', 'fast', 98],
-                  dish2: ['fisk', 'lax', 10],
-                  dish3: ['kött', 'Entrecote', 150]
-                }
+// let foodlist = [
+//   ['potatis', 'plockad på dom hallänska vidderna', 98],
+//   ['fisk', 'lax', 130],
+//   ['kött', 'entrecote', 210],
+//   ['kött', 'entrecote', 210],
+//   ['kött', 'entrecote', 210],
+//   ['kött', 'entrecote', 210],
+//   ['kött', 'entrecote', 210],
+//   ['kött', 'entrecote', 210],
+//   ['kött', 'entrecote', 210],
+//   ['kött', 'entrecote', 210],
+//   ['kött', 'entrecote', 210],
+//   ['kött', 'entrecote', 210]
+// ]
 
-const App = () => {
-  // let showFoodlist
+class App extends Component {
+  state = { foodItems: [] }
 
-  // if (foodlist) {
-  //   showFoodlist = (
-  //     <>
-  //       {foodlist.map(dish => {
-  //         return (
-  //           <div class='dish'>
-  //             <div>{dish[0]}</div>
-  //           </div>
-  //         )
-  //       })}
-  //     </>
-  //   )
-  // }
+  render () {
+    const foodItems = this.state.foodItems;
+    let menuList;
 
-  return (
-    <>
-      <h1>Slowfood</h1>
-      <div className="foodlist">
-        <div className="food">Potatis</div>
-        <div className="description">Potatis plockad på dom hallänska vidderna</div>
-        <div className="price">98</div>
-      </div>
-    </>
-  )
+    if (foodItems.length > 0) {
+      menuList = foodItems.map(foodItem => {
+        return (
+          <>
+            <div class='meal_name'>{foodItem.name}</div>
+            <div class='meal_desc'>{foodItem.desc}</div>
+            <div class='meal_price'>{foodItem.price}</div>
+            </>
+        );
+      });
+    }
+
+    debugger
+
+    return (
+      <>
+        <h1>Slowfood</h1>
+        <div className='foodlist'>{menuList}</div>
+        
+      </>
+    )
+  }
+
+  componentDidMount () {
+    axios.get('./data/menu.json')
+    .then(response => {
+      this.setState({
+        foodItems: response.data
+      })
+    })
+  }
 }
 
 export default App
