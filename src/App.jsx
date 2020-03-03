@@ -29,16 +29,18 @@ class App extends Component {
   }
 
   render () {
-    const foodItems = this.state.foodItems;
-    let menuList;
+    const foodItems = this.state.foodItems
+    let menuList
 
     if (foodItems.length > 0) {
       menuList = foodItems.map(foodItem => {
         return (
           <>
-            <div class='meal_name'>{foodItem.name}</div>
-            <div class='meal_desc'>{foodItem.desc}</div>
-            <div class='meal_price'>{foodItem.price}</div>
+            <div class='row'>
+              <div class='five wide column'>{foodItem.name}</div>
+              <div class='eight wide column'>{foodItem.desc}</div>
+              <div class='two wide column'>{foodItem.price}</div>
+            </div>
           </>
         )
       })
@@ -47,7 +49,9 @@ class App extends Component {
     return (
       <>
         <h1>Slowfood</h1>
-        <div className='foodlist'>{menuList}</div>
+        <div class="ui three column centered grid">
+          {menuList}
+        </div>
       </>
     )
   }

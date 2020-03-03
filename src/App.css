@@ -2,12 +2,3 @@
     display: flex;
     justify-content: space-between;
 }
-
-.meal_name, .meal_desc{
-    display: inline-block;
-    margin: 10px;
-}
-.meal_price {
-    display: block;
-    margin: 10px;
-}
