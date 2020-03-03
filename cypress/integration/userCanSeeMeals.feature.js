@@ -3,16 +3,16 @@ describe('User can see Meals', () => {
         cy.visit('/')
     })
 
-    it('Shows food in list',() => {
-        cy.get(".food").should('contain', 'Potatis');
+    it('Shows meal name in menu',() => {
+        cy.get(".meal_name").should('contain', 'Potatoes');
     });
 
     it('Shows description', () => {
-       cy.get('.description');
+       cy.get('.meal_desc').should('contain', 'plockad på dom hallänska vidderna')
     });
 
     it('Shows price', () => {
-        cy.get('.price').should('contain', '98');
+        cy.get('.meal_price').should('contain', '98');
     });
 
 })

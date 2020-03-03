@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import './App.css'
 import axios from 'axios'
+import './App.css'
 
 // let foodlist = [
 //   ['potatis', 'plockad på dom hallänska vidderna', 98],
@@ -21,7 +21,7 @@ class App extends Component {
   state = { foodItems: [] }
 
   componentDidMount () {
-    axios.get('../src/data/menu.json').then(response => {
+    axios.get('menu.json').then(response => {
       this.setState({
         foodItems: response.data
       })
@@ -29,12 +29,11 @@ class App extends Component {
   }
 
   render () {
-    const foodItems = this.state.foodItems
-    let menuList
+    const foodItems = this.state.foodItems;
+    let menuList;
 
     if (foodItems.length > 0) {
       menuList = foodItems.map(foodItem => {
-        debugger
         return (
           <>
             <div class='meal_name'>{foodItem.name}</div>
