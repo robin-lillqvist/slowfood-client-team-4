@@ -2,21 +2,6 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import './App.css'
 
-// let foodlist = [
-//   ['potatis', 'plockad på dom hallänska vidderna', 98],
-//   ['fisk', 'lax', 130],
-//   ['kött', 'entrecote', 210],
-//   ['kött', 'entrecote', 210],
-//   ['kött', 'entrecote', 210],
-//   ['kött', 'entrecote', 210],
-//   ['kött', 'entrecote', 210],
-//   ['kött', 'entrecote', 210],
-//   ['kött', 'entrecote', 210],
-//   ['kött', 'entrecote', 210],
-//   ['kött', 'entrecote', 210],
-//   ['kött', 'entrecote', 210]
-// ]
-
 class App extends Component {
   state = { foodItems: [] }
 
