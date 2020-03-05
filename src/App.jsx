@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-// import './App.css'
 import LoginForm from './components/LoginForm'
 import { authenticate } from './modules/auth'
 
