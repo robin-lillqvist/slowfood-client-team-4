@@ -2,17 +2,20 @@ import React, { Component } from 'react'
 import axios from 'axios'
 
 export default class ShowMenu extends Component {
-  state = { foodItems: [] }
+  state = { 
+    foodItems: [] 
+  }
 
   componentDidMount () {
-    axios.get('menu.json').then(response => {
+    axios.get('/products').then(response => {
+      debugger
       this.setState({
         foodItems: response.data.products
       })
     })
   }
 
-  render () {
+  render (){
     const foodItems = this.state.foodItems
     let menuList
 
@@ -20,15 +23,15 @@ export default class ShowMenu extends Component {
       menuList = foodItems.map(foodItem => {
         return (
           <>
-            <div id='menu-item' class='row'>
-              <div class='five wide column'>
-                <div class='.meal_name'>{foodItem.name}</div>
+            <div key={foodItem.id} id='menu-item' className='row'>
+              <div className='five wide column'>
+                <div className='.meal_name'>{foodItem.name}</div>
               </div>
-              <div class='eight wide column'>
-                <div class='.meal_desc'>{foodItem.desc}</div>
+              <div className='eight wide column'>
+                <div className='.meal_desc'>{foodItem.description}</div>
               </div>
-              <div class='two wide column'>
-                <div class='.meal_price'>{foodItem.price}</div>
+              <div className='two wide column'>
+                <div className='.meal_price'>{foodItem.price}</div>
               </div>
             </div>
           </>
@@ -37,7 +40,7 @@ export default class ShowMenu extends Component {
     }
     return (
       <div>
-        <div class='ui three column centered grid'>{menuList}</div>
+        <div className='ui three column centered grid'>{menuList}</div>
       </div>
     )
   }
