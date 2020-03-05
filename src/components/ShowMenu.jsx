@@ -20,10 +20,16 @@ export default class ShowMenu extends Component {
       menuList = foodItems.map(foodItem => {
         return (
           <>
-            <div class='row'>
-              <div class='five wide column'>{foodItem.name}</div>
-              <div class='eight wide column'>{foodItem.desc}</div>
-              <div class='two wide column'>{foodItem.price}</div>
+            <div id='menu-item' class='row'>
+              <div class='five wide column'>
+                <div class='.meal_name'>{foodItem.name}</div>
+              </div>
+              <div class='eight wide column'>
+                <div class='.meal_desc'>{foodItem.desc}</div>
+              </div>
+              <div class='two wide column'>
+                <div class='.meal_price'>{foodItem.price}</div>
+              </div>
             </div>
           </>
         )

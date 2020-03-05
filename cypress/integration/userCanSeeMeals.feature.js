@@ -1,18 +1,39 @@
-describe('User can see Meals', () => {
-    before(function () {
-        cy.visit('/')
-    })
+describe("user views menus", () => {
+  beforeEach(() => {
+    cy.visit("/");
+  });
 
-    it('Shows meal name in menu',() => {
-        cy.get(".meal_name").should('contain', 'Potatoes');
+  describe("WHere there are products", () => {
+    before(() => {
+      cy.server();
+      cy.route({
+        method: "GET",
+        url: "http://localhost:3000/api/v1/products",
+        response: "fixture:ProductData.json"
+      });
     });
 
-    it('Shows description', () => {
-       cy.get('.meal_desc').should('contain', 'plockad på dom hallänska vidderna')
+    it("successfully", () => {
+      cy.get("#menu-item").within(() => {
+        cy.contains("Potatoes");
+        cy.contains("plockad på dom hallänska vidderna");
+        cy.contains("98");
+      });
+    });
+  });
+
+  describe("when the are NO products", () => {
+    before(() => {
+      cy.server();
+      cy.route({
+        method: "GET",
+        url: "http://localhost:3000/api/v1/products",
+        response: []
+      });
     });
 
-    it('Shows price', () => {
-        cy.get('.meal_price').should('contain', '98');
+    it("unsuccessfully", () => {
+      cy.get("#menu-item").should("not.exist");
     });
-
-})
+  });
+});
