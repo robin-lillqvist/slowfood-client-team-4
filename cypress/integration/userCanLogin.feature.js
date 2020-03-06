@@ -3,7 +3,6 @@ describe("User authenticates", () => {
         cy.visit("/");
     });
 
-
 it("successfully with valid credentials", () => {
     cy.get("#login").click();
     cy.get("#login-form").within(() => {

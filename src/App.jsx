@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import ShowMenu from './components/ShowMenu'
 import LoginForm from './components/LoginForm'
 import { authenticate } from './modules/auth'
 
@@ -24,7 +25,6 @@ class App extends Component {
 
   render () {
     let renderLogin
-
     const { renderLoginForm, authenticated, message } = this.state
 
     switch (true) {
@@ -55,6 +55,7 @@ class App extends Component {
       <>
         <h1>Slowfood</h1>
         {renderLogin}
+        <ShowMenu />
       </>
     )
   }

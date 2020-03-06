@@ -1,0 +1,28 @@
+{
+    "products": [
+      {
+        "id": 1,
+        "name": "Potatoes",
+        "description": "plockad på dom hallänska vidderna",
+        "price": "98"
+      },
+      {
+        "id": 2,
+        "name": "Laxgryta",
+        "description": "Norwegian fjord salmon",
+        "price": "130"
+      },
+      {
+        "id": 3,
+        "name": "Beef Tender Loin",
+        "description": "Grilled argentinian beef",
+        "price": "130"
+      },
+      {
+        "id": 4,
+        "name": "Korv och Mos",
+        "description": "Hotdog and mashed potatoes",
+        "price": "50"
+      }
+    ]
+  }
