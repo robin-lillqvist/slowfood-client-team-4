@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 
-export default class ShowMenu extends Component {
+class ShowMenu extends Component {
   state = { 
     foodItems: [] 
   }
@@ -45,3 +45,5 @@ export default class ShowMenu extends Component {
     )
   }
 }
+
+export default ShowMenu
