@@ -15,9 +15,10 @@ class ShowMenu extends Component {
     })
   }
 
-  addToOrder() {
-      let id= event.target.parentElement.dataset.id
-    let result = await axios.post('http://localhost:3000/api/v1/orders', { id: id})
+  async addToOrder(event) {
+     let id = event.target.parentElement.dataset.id
+    let result = await axios.post('http://localhost:3000/api/v1/orders', { id: id })
+     this.setState({message: {id: id, message: result.data.message}})
   }
 
   render (){
@@ -31,7 +32,7 @@ class ShowMenu extends Component {
             <div key={foodItem.id} id={`menu-item-${foodItem.id}`} data-id={foodItem.id} data-price={foodItem.price} className='row'>
             {`${foodItem.name} ${foodItem.description} ${foodItem.price}`}
             <button id="button" onClick={this.addToOrder.bind(this)}>Add to order</button>
-              {parseInt(this.state.message.id) === foodItem.id && <p class='message' >{this.state.message.message}</p>}
+              {parseInt(this.state.message.id) === foodItem.id && <p class='message'>{this.state.message.message}</p>}
             </div>
           </>
         )
