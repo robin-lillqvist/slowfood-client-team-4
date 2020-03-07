@@ -8,11 +8,14 @@ class ShowMenu extends Component {
 
   componentDidMount () {
     axios.get('/products').then(response => {
-      debugger
       this.setState({
         foodItems: response.data.products
       })
     })
+  }
+
+  addToOrder() {
+    debugger
   }
 
   render (){
@@ -23,16 +26,9 @@ class ShowMenu extends Component {
       menuList = foodItems.map(foodItem => {
         return (
           <>
-            <div key={foodItem.id} id='menu-item' className='row'>
-              <div className='five wide column'>
-                <div className='.meal_name'>{foodItem.name}</div>
-              </div>
-              <div className='eight wide column'>
-                <div className='.meal_desc'>{foodItem.description}</div>
-              </div>
-              <div className='two wide column'>
-                <div className='.meal_price'>{foodItem.price}</div>
-              </div>
+            <div key={foodItem.id} id={`menu-item-${foodItem.id}`} className='row'>
+            {`${foodItem.name} ${foodItem.description} ${foodItem.price}`}
+            <button id="button" onClick={this.addToOrder.bind(this)}>Add to order</button>
             </div>
           </>
         )

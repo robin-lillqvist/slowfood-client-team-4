@@ -16,7 +16,7 @@ describe("User can add a product to thier order", () => {
 
     it("user gets a confirmation message when adding a product to order", () => {
         cy.visit("http://localhost:3001");
-        cy.get("#product-1").within(() => {
+        cy.get("#menu-item-1").within(() => {
             cy.get("#button")
             .contains("Add to order")
             .click();
