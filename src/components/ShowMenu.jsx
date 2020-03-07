@@ -26,7 +26,7 @@ class ShowMenu extends Component {
       menuList = foodItems.map(foodItem => {
         return (
           <>
-            <div key={foodItem.id} id={`menu-item-${foodItem.id}`} className='row'>
+            <div key={foodItem.id} id={`menu-item-${foodItem.id}`} data-id={foodItem.id} data-price={foodItem.price} className='row'>
             {`${foodItem.name} ${foodItem.description} ${foodItem.price}`}
             <button id="button" onClick={this.addToOrder.bind(this)}>Add to order</button>
             </div>
