@@ -3,7 +3,8 @@ import axios from 'axios'
 
 class ShowMenu extends Component {
   state = { 
-    foodItems: [] 
+    foodItems: [],
+    message: {} 
   }
 
   componentDidMount () {
@@ -30,6 +31,7 @@ class ShowMenu extends Component {
             <div key={foodItem.id} id={`menu-item-${foodItem.id}`} data-id={foodItem.id} data-price={foodItem.price} className='row'>
             {`${foodItem.name} ${foodItem.description} ${foodItem.price}`}
             <button id="button" onClick={this.addToOrder.bind(this)}>Add to order</button>
+              {parseInt(this.state.message.id) === foodItem.id && <p class='message' >{this.state.message.message}</p>}
             </div>
           </>
         )
