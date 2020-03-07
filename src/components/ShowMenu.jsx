@@ -15,7 +15,8 @@ class ShowMenu extends Component {
   }
 
   addToOrder() {
-    debugger
+      let id= event.target.parentElement.dataset.id
+    let result = await axios.post('http://localhost:3000/api/v1/orders', { id: id})
   }
 
   render (){
