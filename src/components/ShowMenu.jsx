@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import axios from 'axios'
 
 class ShowMenu extends Component {
-  state = { 
+  state = {
     foodItems: [],
-    message: {} 
+    message: {},
+    orderId: ''
   }
 
   componentDidMount () {
@@ -15,13 +16,27 @@ class ShowMenu extends Component {
     })
   }
 
-  async addToOrder(event) {
-     let id = event.target.parentElement.dataset.id
-    let result = await axios.post('http://localhost:3000/api/v1/orders', { id: id })
-     this.setState({message: {id: id, message: result.data.message}})
+  async addToOrder (event) {
+    let id = event.target.parentElement.parentElement.dataset.id
+    let result
+    if(this.state.orderId !== '') {
+      result = await axios.put(`http://localhost:3000/api/v1/orders${this.state.orderId}`, {
+      id: id
+    })
+    } else {
+      result = await axios.post('http://localhost:3000/api/v1/orders', {
+      id: id
+    })
+    this.setState({
+      orderId: result.data.order_id
+    })
+    }
+    this.setState({
+      message: { id: id, message: result.data.message }
+    })
   }
 
-  render (){
+  render () {
     const foodItems = this.state.foodItems
     let menuList
 
@@ -29,19 +44,38 @@ class ShowMenu extends Component {
       menuList = foodItems.map(foodItem => {
         return (
           <>
-            <div key={foodItem.id} id={`menu-item-${foodItem.id}`} data-id={foodItem.id} data-price={foodItem.price} className='row'>
-            {`${foodItem.name} ${foodItem.description} ${foodItem.price}`}
-            <button id="button" onClick={this.addToOrder.bind(this)}>Add to order</button>
-              {parseInt(this.state.message.id) === foodItem.id && <p class='message'>{this.state.message.message}</p>}
+            <div class='ui grid'>
+              <div
+                key={foodItem.id}
+                id={`menu-item-${foodItem.id}`}
+                data-id={foodItem.id}
+                data-price={foodItem.price}
+                class='row '
+              >
+                <div class='three wide column'>{foodItem.name}</div>
+                <div class='ten wide column'>
+                  {foodItem.description}
+                  {parseInt(this.state.message.id) === foodItem.id && (
+                    <p className='message'>{this.state.message.message}</p>
+                  )}
+                </div>
+                <div class='one wide column'>{foodItem.price}</div>
+                <div class='one wide column'>
+                  <button id='button' onClick={this.addToOrder.bind(this)}>
+                    Add to order
+                  </button>
+                </div>
+              </div>
             </div>
           </>
         )
       })
     }
     return (
-      <div>
-        <div className='ui three column centered grid'>{menuList}</div>
-      </div>
+      <>
+        {this.state.orderId !== '' && <button>View order</button>}
+        {menuList}
+      </>
     )
   }
 }

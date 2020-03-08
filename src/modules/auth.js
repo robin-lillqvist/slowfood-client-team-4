@@ -7,9 +7,9 @@ const authenticate = async (email, password) => {
       password: password
     });
     await storeAuthCredentials(response);
-    return { authenticated: true };
+    return { authenticated: true, message: `Hi ${JSON.parse(sessionStorage.getItem('credentials')).uid}` };
   } catch (error) {
-    return { authenticated: false, message: error.response.data.errors[0] };
+    return { authenticated: false, message: error.message };
   }
 };
 
