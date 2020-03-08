@@ -3,34 +3,32 @@ import React from 'react'
 const RegistrationForm = ({ submitFormHandler }) => {
   return (
     <form onSubmit={submitFormHandler} id='register-form'>
-      <label className='ui pointing below label'>
-        <i class='mail icon'></i>Email
-      </label>
+      <label forHtml="email">Email</label>
       <input
         className='ui input'
         name='email'
         type='email'
         id='email'
-        placeholder='Search...'
+        placeholder='Email address'
       ></input>
-      <label className='ui pointing below label'>Password</label>
+      <label forHtml="password">Password</label>
       <input
         className='ui input'
         name='password'
         type='password'
         id='password'
-        placeholder='Search...'
+        placeholder='password'
       ></input>
-      <label className='ui pointing below label'>Confirm Password</label>
+      <label forHtml="password_confirmation">Confirm Password</label>
       <input
         className='ui input'
         name='password_confirmation'
         type='password'
         id='password_confirmation'
-        placeholder='Search...'
+        placeholder='Password again'
       ></input>
 
-      <button className='ui primary button' id='submit'>
+      <button id='submit'>
         Submit
       </button>
     </form>

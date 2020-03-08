@@ -70,13 +70,17 @@ class App extends Component {
             <div>
               <button
                 id='login'
-                onClick={() => this.setState({ renderLoginForm: true, message: '' })}
+                onClick={() =>
+                  this.setState({ renderLoginForm: true, message: '' })
+                }
               >
                 Login
               </button>
               <button
                 id='register'
-                onClick={() => this.setState({ renderRegisterForm: true, message: '' })}
+                onClick={() =>
+                  this.setState({ renderRegisterForm: true, message: '' })
+                }
               >
                 Register
               </button>
@@ -95,12 +99,18 @@ class App extends Component {
 
     return (
       <>
-        <h1>Slowfood</h1>
-        {renderMessage}
-        {renderButtons}
-        {renderLogin}
-        {renderRegister}
-        <ShowMenu />
+        <div class='ui container'>
+          <h1>Slowfood</h1>
+          <p>{renderButtons}</p>
+          <p>{renderMessage}</p>
+          <p>{renderLogin}</p>
+          <p>{renderRegister}</p>
+        </div>
+        <div class='ui container'>
+          <div>
+            <ShowMenu />
+          </div>
+        </div>
       </>
     )
   }

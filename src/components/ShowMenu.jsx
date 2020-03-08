@@ -44,13 +44,13 @@ class ShowMenu extends Component {
       menuList = foodItems.map(foodItem => {
         return (
           <>
-            <div class='ui grid'>
+
               <div
                 key={foodItem.id}
                 id={`menu-item-${foodItem.id}`}
                 data-id={foodItem.id}
                 data-price={foodItem.price}
-                class='row '
+                class='row'
               >
                 <div class='three wide column'>{foodItem.name}</div>
                 <div class='ten wide column'>
@@ -66,7 +66,6 @@ class ShowMenu extends Component {
                   </button>
                 </div>
               </div>
-            </div>
           </>
         )
       })
@@ -74,7 +73,9 @@ class ShowMenu extends Component {
     return (
       <>
         {this.state.orderId !== '' && <button>View order</button>}
+        <div class='ui grid meny'>
         {menuList}
+        </div>
       </>
     )
   }
