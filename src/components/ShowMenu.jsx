@@ -19,7 +19,7 @@ class ShowMenu extends Component {
   }
 
   async addToOrder (event) {
-    let id = event.target.parentElement.parentElement.parentElement.parentElement.dataset.id
+    let id = event.target.parentElement.parentElement.parentElement.dataset.id
     let result
     if (this.state.orderId.hasOwnProperty('id')) {
       result = await axios.put(
@@ -61,12 +61,7 @@ class ShowMenu extends Component {
               <div class='three wide column right aligned'>
                 <section className='price'>{foodItem.price} SEK</section>
                 <section className='addtocart'>
-                  <button id='button' className='ui vertical animated button' onClick={this.addToOrder.bind(this)}>
-                    <div class='hidden content'>Order</div>
-                    <div class='visible content'>
-                      <i aria-hidden='true' class='shop icon'></i>
-                    </div>
-                  </button>
+                  <button id='button' className='ui positive button' onClick={this.addToOrder.bind(this)}>Add</button>
                 </section>
               </div>
             </div>
@@ -96,12 +91,12 @@ class ShowMenu extends Component {
           {this.state.showOrder && (
             <>
               <ul id='order-details'>{menuDetails}</ul>
-              <p className="toPay">To pay: {this.state.orderId.order_total}</p>
+              <p className="toPay">To pay: {this.state.orderId.order_total} SEK</p>
             </>
           )}
         </div>
         <div class='ui container'>
-          <img className='divider' src={divider} />
+          <img className='divider' src={divider} alt="divider"/>
           <div class='ui vertically divided grid'>{menuList}</div>
         </div>
       </>
