@@ -6,9 +6,10 @@ class ShowMenu extends Component {
     foodItems: [],
     message: {},
     orderId: '',
+    showOrder: false
   }
 
-  componentDidMount () {
+  componentDidMount() {
     axios.get('/products').then(response => {
       this.setState({
         foodItems: response.data.products
@@ -16,20 +17,20 @@ class ShowMenu extends Component {
     })
   }
 
-  async addToOrder (event) {
+  async addToOrder(event) {
 
     let id = event.target.parentElement.parentElement.dataset.id
-		let result
-		if (this.state.orderId.hasOwnProperty('id')) {
-			result = await axios.put(`http://localhost:3000/api/v1/orders/${this.state.orderId.id}`, { product_id: id })
-		} else {
-			result = await axios.post('http://localhost:3000/api/v1/orders/', { product_id: id })
-		}
-		this.setState({ message: { id: id, message: result.data.message }, orderId: result.data.order })
+    let result
+    if (this.state.orderId.hasOwnProperty('id')) {
+      result = await axios.put(`http://localhost:3000/api/v1/orders/${this.state.orderId.id}`, { product_id: id })
+    } else {
+      result = await axios.post('http://localhost:3000/api/v1/orders/', { product_id: id })
+    }
+    this.setState({ message: { id: id, message: result.data.message }, orderId: result.data.order })
   }
-  
 
-  render () {
+
+  render() {
     const foodItems = this.state.foodItems
     let menuList
 
@@ -38,36 +39,47 @@ class ShowMenu extends Component {
         return (
           <>
 
-              <div
-                key={foodItem.id}
-                id={`menu-item-${foodItem.id}`}
-                data-id={foodItem.id}
-                data-price={foodItem.price}
-                class='row'
-              >
-                <div class='three wide column'>{foodItem.name}</div>
-                <div class='ten wide column'>
-                  {foodItem.description}
-                  {parseInt(this.state.message.id) === foodItem.id && (
-                    <p className='message'>{this.state.message.message}</p>
-                  )}
-                </div>
-                <div class='one wide column'>{foodItem.price}</div>
-                <div class='one wide column'>
-                  <button id='button' onClick={this.addToOrder.bind(this)}>
-                    Add to order
-                  </button>
-                </div>
+            <div
+              key={foodItem.id}
+              id={`menu-item-${foodItem.id}`}
+              data-id={foodItem.id}
+              data-price={foodItem.price}
+              class='row'
+            >
+              <div class='three wide column'>{foodItem.name}</div>
+              <div class='ten wide column'>
+                {foodItem.description}
+                {parseInt(this.state.message.id) === foodItem.id && (
+                  <p className='message'>{this.state.message.message}</p>
+                )}
               </div>
+              <div class='one wide column'>{foodItem.price}</div>
+              <div class='one wide column'>
+                <button id='button' onClick={this.addToOrder.bind(this)}>
+                  Add to order
+                  </button>
+              </div>
+            </div>
           </>
         )
       })
     }
     return (
       <>
-        {this.state.orderId !== '' && <button>View order</button>}
+        {this.state.orderId !== '' &&
+          <button onClick={() => this.setState({ showOrder: !this.state.showOrder })}>View order</button>
+        }
+        {
+          this.state.showOrder &&
+          <>
+            <ul id="order-details">
+              {menuList}
+            </ul>
+            <p>To pay: {this.state.orderId.order_total}</p>
+          </>
+        }
         <div class='ui grid meny'>
-        {menuList}
+          {menuList}
         </div>
       </>
     )
