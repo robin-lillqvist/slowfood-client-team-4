@@ -32,7 +32,7 @@ class ShowMenu extends Component {
 
   render() {
     const foodItems = this.state.foodItems
-    let menuList
+    let menuList, orderDetails
 
     if (foodItems.length > 0) {
       menuList = foodItems.map(foodItem => {
@@ -64,6 +64,12 @@ class ShowMenu extends Component {
         )
       })
     }
+
+    if (this.state.orderId.hasOwnProperty('products')) {
+			orderDetails = this.state.orderId.products.map(item => {
+				return <li key={item.name}>{`${item.amount} x ${item.name}`}</li>
+			})
+		}
     return (
       <>
         {this.state.orderId !== '' &&
@@ -73,7 +79,7 @@ class ShowMenu extends Component {
           this.state.showOrder &&
           <>
             <ul id="order-details">
-              {menuList}
+              {orderDetails}
             </ul>
             <p>To pay: {this.state.orderId.order_total}</p>
           </>
