@@ -5,7 +5,7 @@ class ShowMenu extends Component {
   state = {
     foodItems: [],
     message: {},
-    orderId: ''
+    orderId: '',
   }
 
   componentDidMount () {
@@ -17,24 +17,17 @@ class ShowMenu extends Component {
   }
 
   async addToOrder (event) {
+
     let id = event.target.parentElement.parentElement.dataset.id
-    let result
-    if(this.state.orderId !== '') {
-      result = await axios.put(`http://localhost:3000/api/v1/orders${this.state.orderId}`, {
-      id: id
-    })
-    } else {
-      result = await axios.post('http://localhost:3000/api/v1/orders', {
-      id: id
-    })
-    this.setState({
-      orderId: result.data.order_id
-    })
-    }
-    this.setState({
-      message: { id: id, message: result.data.message }
-    })
+		let result
+		if (this.state.orderId.hasOwnProperty('id')) {
+			result = await axios.put(`http://localhost:3000/api/v1/orders/${this.state.orderId.id}`, { product_id: id })
+		} else {
+			result = await axios.post('http://localhost:3000/api/v1/orders/', { product_id: id })
+		}
+		this.setState({ message: { id: id, message: result.data.message }, orderId: result.data.order })
   }
+  
 
   render () {
     const foodItems = this.state.foodItems
