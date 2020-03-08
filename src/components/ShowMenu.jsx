@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import divider from '../img/divider.png'
 
 class ShowMenu extends Component {
   state = {
@@ -9,7 +10,7 @@ class ShowMenu extends Component {
     showOrder: false
   }
 
-  componentDidMount() {
+  componentDidMount () {
     axios.get('/products').then(response => {
       this.setState({
         foodItems: response.data.products
@@ -17,20 +18,26 @@ class ShowMenu extends Component {
     })
   }
 
-  async addToOrder(event) {
-
-    let id = event.target.parentElement.parentElement.dataset.id
+  async addToOrder (event) {
+    let id = event.target.parentElement.parentElement.parentElement.parentElement.dataset.id
     let result
     if (this.state.orderId.hasOwnProperty('id')) {
-      result = await axios.put(`http://localhost:3000/api/v1/orders/${this.state.orderId.id}`, { product_id: id })
+      result = await axios.put(
+        `http://localhost:3000/api/v1/orders/${this.state.orderId.id}`,
+        { product_id: id }
+      )
     } else {
-      result = await axios.post('http://localhost:3000/api/v1/orders/', { product_id: id })
+      result = await axios.post('http://localhost:3000/api/v1/orders/', {
+        product_id: id
+      })
     }
-    this.setState({ message: { id: id, message: result.data.message }, orderId: result.data.order })
+    this.setState({
+      message: { id: id, message: result.data.message },
+      orderId: result.data.order
+    })
   }
 
-
-  render() {
+  render () {
     const foodItems = this.state.foodItems
     let menuList, menuDetails
 
@@ -38,26 +45,29 @@ class ShowMenu extends Component {
       menuList = foodItems.map(foodItem => {
         return (
           <>
-
             <div
+              class='two column row'
               key={foodItem.id}
               id={`menu-item-${foodItem.id}`}
               data-id={foodItem.id}
               data-price={foodItem.price}
-              class='row'
             >
-              <div class='three wide column'>{foodItem.name}</div>
-              <div class='ten wide column'>
-                {foodItem.description}
-                {parseInt(this.state.message.id) === foodItem.id && (
-                  <p className='message'>{this.state.message.message}</p>
-                )}
+              <div class='thirteen wide column'>
+                <section className='header'>{foodItem.name}</section>
+                <section className='description'>
+                  {foodItem.description}
+                </section>
               </div>
-              <div class='one wide column'>{foodItem.price}</div>
-              <div class='one wide column'>
-                <button id='button' onClick={this.addToOrder.bind(this)}>
-                  Add to order
+              <div class='three wide column right aligned'>
+                <section className='price'>{foodItem.price} SEK</section>
+                <section className='addtocart'>
+                  <button id='button' className='ui vertical animated button' onClick={this.addToOrder.bind(this)}>
+                    <div class='hidden content'>Order</div>
+                    <div class='visible content'>
+                      <i aria-hidden='true' class='shop icon'></i>
+                    </div>
                   </button>
+                </section>
               </div>
             </div>
           </>
@@ -66,26 +76,33 @@ class ShowMenu extends Component {
     }
 
     if (this.state.orderId.hasOwnProperty('products')) {
-			menuDetails = this.state.orderId.products.map(item => {
-				return <li key={item.name}>{`${item.amount} x ${item.name}`}</li>
-			})
-		}
+      menuDetails = this.state.orderId.products.map(item => {
+        return <li key={item.name}>{`${item.amount} x ${item.name}`}</li>
+      })
+    }
     return (
       <>
-        {this.state.orderId !== '' &&
-          <button onClick={() => this.setState({ showOrder: !this.state.showOrder })}>View order</button>
-        }
-        {
-          this.state.showOrder &&
-          <>
-            <ul id="order-details">
-              {menuDetails}
-            </ul>
-            <p>To pay: {this.state.orderId.order_total}</p>
-          </>
-        }
-        <div class='ui grid meny'>
-          {menuList}
+        <div class='ui center aligned container'>
+          {this.state.orderId !== '' && (
+            <button
+            className='ui primary button'
+              onClick={() =>
+                this.setState({ showOrder: !this.state.showOrder })
+              }
+            >
+              View order
+            </button>
+          )}
+          {this.state.showOrder && (
+            <>
+              <ul id='order-details'>{menuDetails}</ul>
+              <p className="toPay">To pay: {this.state.orderId.order_total}</p>
+            </>
+          )}
+        </div>
+        <div class='ui container'>
+          <img className='divider' src={divider} />
+          <div class='ui vertically divided grid'>{menuList}</div>
         </div>
       </>
     )
