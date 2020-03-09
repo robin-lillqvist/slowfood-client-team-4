@@ -121,15 +121,15 @@ class App extends Component {
     return (
       <>
           <section className='buttons'>
-            <p>{renderButtons}{renderBackButton}</p>
+            {renderButtons}{renderBackButton}
           </section>
-          <div class='ui container'>
+          <div className='ui container'>
             <h1>Janko's Burgers and Pizzas</h1>
             <p className='messages'>{renderMessage}</p>
-            <p class='forms'>{renderLogin}</p>
-            <p class='forms'>{renderRegister}</p>
+            <p className='forms'>{renderLogin}</p>
+            <p className='forms'>{renderRegister}</p>
           </div>
-          <div class='ui container'>
+          <div className='ui container'>
             <div>
               <ShowMenu />
             </div>

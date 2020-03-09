@@ -39,7 +39,7 @@ class ShowMenu extends Component {
 
   render () {
     const foodItems = this.state.foodItems
-    let menuList, menuDetails
+    let menuList, menuDetails, renderOrderMessage
 
     if (foodItems.length > 0) {
       menuList = foodItems.map(foodItem => {
@@ -71,14 +71,20 @@ class ShowMenu extends Component {
       })
     }
     
+    if(this.state.message){
+      renderOrderMessage = (
+      <div className="forms">{this.state.message.message}</div>
+      )
+    }
+
     if (this.state.orderId.hasOwnProperty('products')) {
       menuDetails = this.state.orderId.products.map(item => {
         return <li key={item.name}>{`${item.amount} x ${item.name}`}</li>
       })
     }
-    
     return (
       <>
+        {renderOrderMessage}
         <div className='ui center aligned container'>
           {this.state.orderId !== '' && (
             <button
