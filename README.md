@@ -1,9 +1,9 @@
 # Slowfood challenge Team 4  (client)
 
 ### Authors
-[Robin Lillqvist](https://github.com/emtalen)  
-[Jaime Cruz Hostalot](https://github.com/kaylawoodbury)  
-[Janko Radakovic](https://github.com/kfrostare)  
+[Robin Lillqvist](https://github.com/robin-lillqvist)  
+[Jaime Cruz Hostalot](https://github.com/jaimeCrz)  
+[Janko Radakovic](https://github.com/MadFarmer101)  
 
 ## Built with
 **Front End:** React v.16.12.0 | CSS  
