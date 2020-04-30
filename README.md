@@ -1,4 +1,5 @@
 # Slowfood challenge Team 4  (client)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/207875d1-9139-4c85-b34b-9f6a23780915/deploy-status)](https://app.netlify.com/sites/slowfoodchallenge/deploys)
 
 ### Authors
 [Robin Lillqvist](https://github.com/robin-lillqvist)  
